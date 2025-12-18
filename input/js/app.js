@@ -13,18 +13,32 @@ class InventoryApp {
         this.filterHandler = new FilterHandler();
         this.exportHandler = new ExportHandler();
         this.modalHandler = new ModalHandler();
-        
+
         this.currentPage = 1;
         this.itemsPerPage = 20;
         this.filteredItems = [];
         this.selectedItems = new Set();
-        
+
         this.init();
     }
 
     init() {
         this.loadInitialData();
         this.bindEvents();
+        this.updateTable();
+
+        // Initialize table scrolling features
+        this.initTableScrolling();
+    }
+
+    initTableScrolling() {
+        // Add scroll hints for mobile
+        this.tableRenderer.addScrollHint();
+
+        // Center table on mobile for better UX
+        this.tableRenderer.centerTableOnMobile();
+
+        // Update scroll hints when table is updated
         this.updateTable();
     }
 
@@ -101,7 +115,7 @@ class InventoryApp {
         // Form events
         const form = document.getElementById('itemForm');
         const toggleFormBtn = document.getElementById('toggleForm');
-        
+
         toggleFormBtn.addEventListener('click', () => {
             this.formHandler.toggleForm(form, toggleFormBtn);
         });
@@ -148,6 +162,15 @@ class InventoryApp {
             this.handleDeleteSelected();
         });
 
+        // Mobile floating action button events
+        document.getElementById('mobileExport').addEventListener('click', () => {
+            this.exportHandler.exportToExcel(this.filteredItems);
+        });
+
+        document.getElementById('mobileDelete').addEventListener('click', () => {
+            this.handleDeleteSelected();
+        });
+
         // Modal events
         document.getElementById('closeModal').addEventListener('click', () => {
             this.modalHandler.closeModal();
@@ -162,10 +185,10 @@ class InventoryApp {
 
     handleFormSubmit(e) {
         e.preventDefault();
-        
+
         const formData = new FormData(e.target);
         const itemData = {};
-        
+
         // Convert FormData to object
         for (let [key, value] of formData.entries()) {
             itemData[key] = value;
@@ -185,15 +208,15 @@ class InventoryApp {
 
         // Add item to manager
         this.itemManager.addItem(itemData);
-        
+
         // Update filtered items and table
         this.applyCurrentFilters();
         this.updateTable();
-        
+
         // Reset form
         e.target.reset();
         this.formHandler.showSuccess('Data berhasil disimpan!');
-        
+
         // Close form
         setTimeout(() => {
             document.getElementById('toggleForm').click();
@@ -203,11 +226,11 @@ class InventoryApp {
     handleSelectAll(e) {
         const isChecked = e.target.checked;
         const checkboxes = document.querySelectorAll('tbody input[type="checkbox"]');
-        
+
         checkboxes.forEach(checkbox => {
             checkbox.checked = isChecked;
             const itemId = parseInt(checkbox.dataset.itemId);
-            
+
             if (isChecked) {
                 this.selectedItems.add(itemId);
             } else {
@@ -220,7 +243,7 @@ class InventoryApp {
 
     handleItemSelection(e) {
         const itemId = parseInt(e.target.dataset.itemId);
-        
+
         if (e.target.checked) {
             this.selectedItems.add(itemId);
         } else {
@@ -231,7 +254,7 @@ class InventoryApp {
         const selectAllCheckbox = document.getElementById('selectAll');
         const totalItems = this.getCurrentPageItems().length;
         const selectedInPage = document.querySelectorAll('tbody input[type="checkbox"]:checked').length;
-        
+
         selectAllCheckbox.checked = selectedInPage === totalItems;
         selectAllCheckbox.indeterminate = selectedInPage > 0 && selectedInPage < totalItems;
 
@@ -241,9 +264,9 @@ class InventoryApp {
     updateSelectionCount() {
         const selectedCount = this.selectedItems.size;
         const deleteBtn = document.getElementById('deleteSelected');
-        
+
         deleteBtn.disabled = selectedCount === 0;
-        deleteBtn.textContent = selectedCount > 0 
+        deleteBtn.textContent = selectedCount > 0
             ? `🗑️ Hapus Terpilih (${selectedCount})`
             : '🗑️ Hapus Terpilih';
     }
@@ -262,11 +285,11 @@ class InventoryApp {
 
             // Clear selection
             this.selectedItems.clear();
-            
+
             // Update filtered items and table
             this.applyCurrentFilters();
             this.updateTable();
-            
+
             this.formHandler.showSuccess(`${this.selectedItems.size} item berhasil dihapus!`);
         }
     }
@@ -291,12 +314,12 @@ class InventoryApp {
 
     updateFilterOptions() {
         const allItems = this.itemManager.getAllItems();
-        
+
         // Update jenis filter
         const jenisSelect = document.getElementById('filterJenis');
         const jenisSet = new Set(allItems.map(item => item.jenis).filter(Boolean));
         this.filterHandler.updateFilterOptions(jenisSelect, jenisSet);
-        
+
         // Update satuan filter
         const satuanSelect = document.getElementById('filterSatuan');
         const satuanSet = new Set(allItems.map(item => item.satuan).filter(Boolean));
@@ -311,7 +334,7 @@ class InventoryApp {
 
     updateTable() {
         const currentPageItems = this.getCurrentPageItems();
-        
+
         this.tableRenderer.renderTable(
             currentPageItems,
             this.selectedItems,
@@ -320,21 +343,27 @@ class InventoryApp {
         );
 
         this.updatePaginationInfo();
+
+        // Re-initialize scrolling features after table update
+        setTimeout(() => {
+            this.tableRenderer.addScrollHint();
+            this.tableRenderer.centerTableOnMobile();
+        }, 100);
     }
 
     updatePaginationInfo() {
         const totalPages = Math.ceil(this.filteredItems.length / this.itemsPerPage);
         const currentPageItems = this.getCurrentPageItems();
         const totalItems = this.filteredItems.length;
-        
+
         document.getElementById('currentPage').textContent = this.currentPage;
         document.getElementById('totalPages').textContent = totalPages;
         document.getElementById('totalItems').textContent = totalItems;
-        
+
         // Update pagination buttons
         const prevBtn = document.getElementById('prevPage');
         const nextBtn = document.getElementById('nextPage');
-        
+
         prevBtn.disabled = this.currentPage === 1;
         nextBtn.disabled = this.currentPage === totalPages;
     }
@@ -356,7 +385,7 @@ class InventoryApp {
 
     handleTableAction(itemId, action) {
         const item = this.itemManager.getItemById(itemId);
-        
+
         if (!item) {
             alert('Item tidak ditemukan.');
             return;
@@ -374,13 +403,13 @@ class InventoryApp {
 
     handleDeleteSingle(itemId) {
         const item = this.itemManager.getItemById(itemId);
-        
+
         if (confirm(`Apakah Anda yakin ingin menghapus item "${item.namaItem}"?`)) {
             this.itemManager.deleteItem(itemId);
             this.selectedItems.delete(itemId);
             this.applyCurrentFilters();
             this.updateTable();
-            
+
             this.formHandler.showSuccess('Item berhasil dihapus!');
         }
     }
@@ -431,7 +460,7 @@ class InventoryApp {
 // Initialize app when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     const app = new InventoryApp();
-    
+
     // Make app available globally for debugging
     window.inventoryApp = app;
 });

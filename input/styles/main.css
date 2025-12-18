@@ -231,12 +231,62 @@ textarea.form-control {
 .table-container {
     overflow-x: auto;
     border-radius: 8px;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: #c1c1c1 #f1f1f1;
+}
+
+/* Webkit scrollbar styling */
+.table-container::-webkit-scrollbar {
+    height: 8px;
+}
+
+.table-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.table-container::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+}
+
+.table-container::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
 }
 
 .table-wrapper {
     border: 1px solid #e9ecef;
     border-radius: 8px;
     overflow: hidden;
+    min-width: 1200px;
+    /* Ensure table has minimum width */
+}
+
+/* Table scroll indicators for desktop */
+.table-container::before {
+    content: '';
+    position: sticky;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 20px;
+    background: linear-gradient(to right, rgba(248, 249, 250, 0.9), transparent);
+    pointer-events: none;
+    z-index: 5;
+}
+
+.table-container::after {
+    content: '';
+    position: sticky;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 20px;
+    background: linear-gradient(to left, rgba(248, 249, 250, 0.9), transparent);
+    pointer-events: none;
+    z-index: 5;
 }
 
 .items-table {
@@ -254,6 +304,41 @@ textarea.form-control {
     border-bottom: 2px solid #e9ecef;
     white-space: nowrap;
     font-size: 0.85rem;
+}
+
+/* Make checkboxes larger and more touch-friendly */
+.items-table th:first-child,
+.items-table td:first-child {
+    min-width: 50px;
+    text-align: center;
+    padding: 12px 8px;
+}
+
+.items-table input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    margin: 0;
+    transform: scale(1.1);
+}
+
+/* Header checkbox styling */
+#selectAll {
+    width: 20px !important;
+    height: 20px !important;
+}
+
+@media (hover: none) and (pointer: coarse) {
+    .items-table input[type="checkbox"] {
+        width: 22px;
+        height: 22px;
+        transform: scale(1.2);
+    }
+
+    #selectAll {
+        width: 24px !important;
+        height: 24px !important;
+    }
 }
 
 .items-table td {
@@ -437,6 +522,7 @@ textarea.form-control {
         opacity: 0;
         transform: translateY(20px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -473,6 +559,7 @@ textarea.form-control {
     0% {
         left: -100%;
     }
+
     100% {
         left: 100%;
     }

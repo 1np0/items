@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/responsive.css">
 </head>
+
 <body>
     <div class="container">
         <header class="header">
@@ -28,26 +30,26 @@
                     <div class="form-grid">
                         <div class="form-group">
                             <label for="kodeItem">Kode Item *</label>
-                            <input type="text" id="kodeItem" name="kodeItem" required 
-                                   placeholder="Contoh: AS01, ITM001" class="form-control">
+                            <input type="text" id="kodeItem" name="kodeItem" required placeholder="Contoh: AS01, ITM001"
+                                class="form-control">
                         </div>
 
                         <div class="form-group">
                             <label for="barcode">Barcode</label>
-                            <input type="text" id="barcode" name="barcode" 
-                                   placeholder="Kode barcode produk" class="form-control">
+                            <input type="text" id="barcode" name="barcode" placeholder="Kode barcode produk"
+                                class="form-control">
                         </div>
 
                         <div class="form-group full-width">
                             <label for="namaItem">Nama Item *</label>
-                            <input type="text" id="namaItem" name="namaItem" required 
-                                   placeholder="Nama lengkap produk" class="form-control">
+                            <input type="text" id="namaItem" name="namaItem" required placeholder="Nama lengkap produk"
+                                class="form-control">
                         </div>
 
                         <div class="form-group">
                             <label for="stok">Stok</label>
-                            <input type="number" id="stok" name="stok" step="0.01" 
-                                   placeholder="0,00" class="form-control">
+                            <input type="number" id="stok" name="stok" step="0.01" placeholder="0,00"
+                                class="form-control">
                         </div>
 
                         <div class="form-group">
@@ -66,32 +68,30 @@
 
                         <div class="form-group">
                             <label for="rak">Rak</label>
-                            <input type="text" id="rak" name="rak" 
-                                   placeholder="Lokasi rak" class="form-control">
+                            <input type="text" id="rak" name="rak" placeholder="Lokasi rak" class="form-control">
                         </div>
 
                         <div class="form-group">
                             <label for="jenis">Jenis</label>
-                            <input type="text" id="jenis" name="jenis" 
-                                   placeholder="Kategori produk" class="form-control">
+                            <input type="text" id="jenis" name="jenis" placeholder="Kategori produk"
+                                class="form-control">
                         </div>
 
                         <div class="form-group">
                             <label for="merek">Merek</label>
-                            <input type="text" id="merek" name="merek" 
-                                   placeholder="Nama merek" class="form-control">
+                            <input type="text" id="merek" name="merek" placeholder="Nama merek" class="form-control">
                         </div>
 
                         <div class="form-group">
                             <label for="hargaPokok">Harga Pokok</label>
-                            <input type="number" id="hargaPokok" name="hargaPokok" step="0.01" 
-                                   placeholder="0,00" class="form-control">
+                            <input type="number" id="hargaPokok" name="hargaPokok" step="0.01" placeholder="0,00"
+                                class="form-control">
                         </div>
 
                         <div class="form-group">
                             <label for="hargaJual">Harga Jual</label>
-                            <input type="number" id="hargaJual" name="hargaJual" step="0.01" 
-                                   placeholder="0,00" class="form-control">
+                            <input type="number" id="hargaJual" name="hargaJual" step="0.01" placeholder="0,00"
+                                class="form-control">
                         </div>
 
                         <div class="form-group">
@@ -114,8 +114,8 @@
 
                         <div class="form-group">
                             <label for="stokMin">Stok Min</label>
-                            <input type="number" id="stokMin" name="stokMin" step="0.01" 
-                                   placeholder="0,00" class="form-control">
+                            <input type="number" id="stokMin" name="stokMin" step="0.01" placeholder="0,00"
+                                class="form-control">
                         </div>
 
                         <div class="form-group">
@@ -129,14 +129,14 @@
 
                         <div class="form-group">
                             <label for="supplier">Supplier</label>
-                            <input type="text" id="supplier" name="supplier" 
-                                   placeholder="Kode supplier" class="form-control">
+                            <input type="text" id="supplier" name="supplier" placeholder="Kode supplier"
+                                class="form-control">
                         </div>
 
                         <div class="form-group full-width">
                             <label for="keterangan">Keterangan</label>
-                            <textarea id="keterangan" name="keterangan" 
-                                      placeholder="Catatan tambahan" class="form-control"></textarea>
+                            <textarea id="keterangan" name="keterangan" placeholder="Catatan tambahan"
+                                class="form-control"></textarea>
                         </div>
                     </div>
 
@@ -171,8 +171,8 @@
                     </div>
                     <div class="filter-group">
                         <label for="searchKeyword">Cari:</label>
-                        <input type="text" id="searchKeyword" class="form-control" 
-                               placeholder="Cari berdasarkan nama, kode, atau merek">
+                        <input type="text" id="searchKeyword" class="form-control"
+                            placeholder="Cari berdasarkan nama, kode, atau merek">
                     </div>
                 </div>
             </section>
@@ -225,7 +225,7 @@
 
                 <div class="pagination-info">
                     <div class="info-text">
-                        Menampilkan <span id="currentPage">1</span> dari <span id="totalPages">1</span> 
+                        Menampilkan <span id="currentPage">1</span> dari <span id="totalPages">1</span>
                         halaman (<span id="totalItems">0</span> item)
                     </div>
                     <div class="pagination-controls">
@@ -234,6 +234,16 @@
                     </div>
                 </div>
             </section>
+
+            <!-- Floating Action Buttons untuk Mobile -->
+            <div class="table-actions-mobile">
+                <button type="button" id="mobileExport" class="fab-btn" title="Export Data">
+                    📊
+                </button>
+                <button type="button" id="mobileDelete" class="fab-btn" title="Hapus Terpilih">
+                    🗑️
+                </button>
+            </div>
         </div>
     </div>
 
@@ -254,4 +264,5 @@
 
     <script type="module" src="js/app.js"></script>
 </body>
+
 </html>

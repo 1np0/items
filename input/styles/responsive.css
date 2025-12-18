@@ -32,7 +32,8 @@
     /* Form controls */
     .form-control {
         padding: 10px;
-        font-size: 16px; /* Prevent zoom on iOS */
+        font-size: 16px;
+        /* Prevent zoom on iOS */
     }
 
     .item-form {
@@ -46,17 +47,75 @@
         padding: 15px;
     }
 
-    /* Table responsive wrapper */
+    /* Table responsive wrapper - Fix horizontal scroll */
     .table-container {
         border-radius: 0;
         border-left: 0;
         border-right: 0;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scroll-behavior: smooth;
+        position: relative;
+        max-width: 100vw;
+        margin-bottom: 20px;
     }
 
     .table-wrapper {
         border-radius: 0;
         border-left: 0;
         border-right: 0;
+        min-width: 900px;
+        /* Ensure minimum width for horizontal scroll */
+        width: 100%;
+    }
+
+    /* Add visual indicator for scrollable table */
+    .table-container::before {
+        content: '';
+        display: block;
+        height: 1px;
+        background: linear-gradient(to right, transparent, #e9ecef 20%, #e9ecef 80%, transparent);
+        margin-bottom: 10px;
+    }
+
+    .table-container::after {
+        content: '← Geser untuk melihat lebih banyak →';
+        display: block;
+        text-align: center;
+        font-size: 0.75rem;
+        color: #6c757d;
+        padding: 8px 0;
+        background: #f8f9fa;
+        border: 1px dashed #dee2e6;
+        border-radius: 4px;
+        margin: 10px 20px;
+    }
+
+    /* Show scrollbar for better UX */
+    .table-container::-webkit-scrollbar {
+        height: 6px;
+    }
+
+    .table-container::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 3px;
+    }
+
+    .table-container::-webkit-scrollbar-thumb {
+        background: #c1c1c1;
+        border-radius: 3px;
+    }
+
+    .table-container::-webkit-scrollbar-thumb:hover {
+        background: #a8a8a8;
+    }
+
+    /* Make table headers sticky for better UX */
+    .items-table thead {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        background: white;
     }
 
     /* Table headers and cells */
@@ -67,52 +126,82 @@
     }
 
     /* Hide less important columns on mobile */
-    .items-table th:nth-child(3), /* Barcode */
+    .items-table th:nth-child(3),
+    /* Barcode */
     .items-table td:nth-child(3) {
         display: none;
     }
 
-    .items-table th:nth-child(7), /* Rak */
+    .items-table th:nth-child(7),
+    /* Rak */
     .items-table td:nth-child(7) {
         display: none;
     }
 
-    .items-table th:nth-child(10), /* Harga Pokok */
+    .items-table th:nth-child(10),
+    /* Harga Pokok */
     .items-table td:nth-child(10) {
         display: none;
     }
 
-    .items-table th:nth-child(12), /* Tipe */
+    .items-table th:nth-child(12),
+    /* Tipe */
     .items-table td:nth-child(12) {
         display: none;
     }
 
-    .items-table th:nth-child(13), /* System HPP */
+    .items-table th:nth-child(13),
+    /* System HPP */
     .items-table td:nth-child(13) {
         display: none;
     }
 
-    .items-table th:nth-child(16), /* Keterangan */
+    .items-table th:nth-child(16),
+    /* Keterangan */
     .items-table td:nth-child(16) {
         display: none;
     }
 
-    .items-table th:nth-child(17), /* Supplier */
+    .items-table th:nth-child(17),
+    /* Supplier */
     .items-table td:nth-child(17) {
         display: none;
+    }
+
+    /* Improve checkbox and action buttons for mobile */
+    .items-table input[type="checkbox"] {
+        width: 18px;
+        height: 18px;
+        cursor: pointer;
     }
 
     /* Action buttons in table */
     .action-buttons {
         flex-direction: column;
-        gap: 2px;
+        gap: 4px;
+        min-width: 60px;
     }
 
     .action-btn {
-        padding: 4px 6px;
-        font-size: 11px;
+        padding: 6px 8px;
+        font-size: 0.75rem;
         width: 100%;
         text-align: center;
+        border-radius: 4px;
+        min-height: 28px;
+        border: 1px solid transparent;
+    }
+
+    .action-btn.edit {
+        background: #fff3cd;
+        color: #856404;
+        border-color: #ffeaa7;
+    }
+
+    .action-btn.delete {
+        background: #f8d7da;
+        color: #721c24;
+        border-color: #f5c6cb;
     }
 
     /* Form header and actions */
@@ -128,9 +217,68 @@
         align-items: stretch;
     }
 
+    /* Fix table actions buttons size and position */
     .table-actions {
         justify-content: center;
         flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    /* Make export and delete buttons smaller on mobile */
+    .table-actions .btn {
+        padding: 8px 12px;
+        font-size: 0.85rem;
+        font-weight: 500;
+        border-radius: 6px;
+        min-height: 36px;
+        white-space: nowrap;
+    }
+
+    .table-actions .btn .icon {
+        font-size: 0.9rem;
+        margin-right: 4px;
+    }
+
+    /* Alternative: Move to floating action button for better UX */
+    .table-actions-mobile {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        z-index: 1000;
+    }
+
+    .fab-btn {
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        transition: all 0.3s ease;
+    }
+
+    .fab-btn:hover {
+        transform: scale(1.1);
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Hide regular table actions on very small screens */
+    @media screen and (max-width: 480px) {
+        .table-actions {
+            display: none;
+        }
+
+        .table-actions-mobile {
+            display: flex;
+        }
     }
 
     .form-actions {
@@ -202,22 +350,26 @@
     }
 
     /* Hide some columns on tablet */
-    .items-table th:nth-child(3), /* Barcode */
+    .items-table th:nth-child(3),
+    /* Barcode */
     .items-table td:nth-child(3) {
         display: none;
     }
 
-    .items-table th:nth-child(7), /* Rak */
+    .items-table th:nth-child(7),
+    /* Rak */
     .items-table td:nth-child(7) {
         display: none;
     }
 
-    .items-table th:nth-child(16), /* Keterangan */
+    .items-table th:nth-child(16),
+    /* Keterangan */
     .items-table td:nth-child(16) {
         display: none;
     }
 
-    .items-table th:nth-child(17), /* Supplier */
+    .items-table th:nth-child(17),
+    /* Supplier */
     .items-table td:nth-child(17) {
         display: none;
     }
@@ -245,42 +397,58 @@
     }
 
     /* More aggressive column hiding */
-    .items-table th:nth-child(6), /* Rak */
+    .items-table th:nth-child(6),
+    /* Rak */
     .items-table td:nth-child(6) {
         display: none;
     }
 
-    .items-table th:nth-child(9), /* Merek */
+    .items-table th:nth-child(9),
+    /* Merek */
     .items-table td:nth-child(9) {
         display: none;
     }
 
-    .items-table th:nth-child(11), /* Harga Jual */
+    .items-table th:nth-child(11),
+    /* Harga Jual */
     .items-table td:nth-child(11) {
         display: none;
     }
 
-    .items-table th:nth-child(14), /* Status Jual */
+    .items-table th:nth-child(14),
+    /* Status Jual */
     .items-table td:nth-child(14) {
         display: none;
     }
 
     /* Keep only essential columns: Code, Name, Stock, Unit, Price, Actions */
-    .items-table th:nth-child(1), /* Checkbox */
-    .items-table th:nth-child(2), /* Code */
-    .items-table th:nth-child(4), /* Name */
-    .items-table th:nth-child(5), /* Stock */
-    .items-table th:nth-child(8), /* Type */
-    .items-table th:nth-child(18) { /* Actions */
+    .items-table th:nth-child(1),
+    /* Checkbox */
+    .items-table th:nth-child(2),
+    /* Code */
+    .items-table th:nth-child(4),
+    /* Name */
+    .items-table th:nth-child(5),
+    /* Stock */
+    .items-table th:nth-child(8),
+    /* Type */
+    .items-table th:nth-child(18) {
+        /* Actions */
         display: table-cell;
     }
 
-    .items-table td:nth-child(1), /* Checkbox */
-    .items-table td:nth-child(2), /* Code */
-    .items-table td:nth-child(4), /* Name */
-    .items-table td:nth-child(5), /* Stock */
-    .items-table td:nth-child(8), /* Type */
-    .items-table td:nth-child(18) { /* Actions */
+    .items-table td:nth-child(1),
+    /* Checkbox */
+    .items-table td:nth-child(2),
+    /* Code */
+    .items-table td:nth-child(4),
+    /* Name */
+    .items-table td:nth-child(5),
+    /* Stock */
+    .items-table td:nth-child(8),
+    /* Type */
+    .items-table td:nth-child(18) {
+        /* Actions */
         display: table-cell;
     }
 
@@ -327,17 +495,20 @@
     }
 
     /* Show more columns in landscape */
-    .items-table th:nth-child(3), /* Barcode */
+    .items-table th:nth-child(3),
+    /* Barcode */
     .items-table td:nth-child(3) {
         display: table-cell;
     }
 
-    .items-table th:nth-child(6), /* Rak */
+    .items-table th:nth-child(6),
+    /* Rak */
     .items-table td:nth-child(6) {
         display: table-cell;
     }
 
-    .items-table th:nth-child(9), /* Merek */
+    .items-table th:nth-child(9),
+    /* Merek */
     .items-table td:nth-child(9) {
         display: table-cell;
     }
@@ -385,7 +556,9 @@
 }
 
 /* High DPI / Retina displays */
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+@media (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dpi) {
+
     .form-control,
     .btn {
         border-width: 1px;
@@ -394,10 +567,12 @@
 
 /* Touch device optimizations */
 @media (hover: none) and (pointer: coarse) {
+
     .btn,
     .form-control,
     .action-btn {
-        min-height: 44px; /* Apple's recommended touch target */
+        min-height: 44px;
+        /* Apple's recommended touch target */
     }
 
     .action-btn {
@@ -413,6 +588,7 @@
 
 /* Print styles */
 @media print {
+
     .input-section,
     .filter-section,
     .form-actions,

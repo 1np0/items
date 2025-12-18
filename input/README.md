@@ -34,13 +34,22 @@ Sistem manajemen inventory yang responsif dengan fitur lengkap untuk mengelola d
 - Icons yang informatif
 - Loading states dan feedback
 
-## 📱 Responsive Design
+## 📱 Responsive Design (Telah Diperbaiki!)
 
 Sistem ini dirancang untuk bekerja dengan baik di:
-- **Desktop** (1200px+): Tampilan lengkap dengan semua kolom
-- **Tablet** (769px - 1024px): Beberapa kolom disembunyikan
-- **Mobile** (320px - 768px): Hanya kolom penting yang ditampilkan
-- **Small Mobile** (320px - 480px): Tampilan minimal dengan essencial columns
+- **Desktop** (1200px+): Tampilan lengkap dengan semua kolom + scroll indicators
+- **Tablet** (769px - 1024px): Beberapa kolom disembunyikan + horizontal scroll
+- **Mobile** (320px - 768px): Kolom penting + floating action buttons + horizontal scroll
+- **Small Mobile** (320px - 480px): Minimal columns + touch-friendly interface
+
+### 🆕 Perbaikan Mobile Terbaru:
+- ✅ **Horizontal Scroll**: Tabel dapat di-scroll horizontal dengan smooth scrolling
+- ✅ **Floating Action Buttons**: Tombol export dan delete yang tidak mengganggu (hanya di mobile)
+- ✅ **Touch Swipe**: Support gesture swipe untuk navigasi tabel
+- ✅ **Scroll Indicators**: Visual indicator untuk menunjukkan konten yang bisa di-scroll
+- ✅ **Sticky Headers**: Header tabel tetap terlihat saat scroll
+- ✅ **Touch-Friendly Checkboxes**: Checkbox yang lebih besar untuk mobile
+- ✅ **Auto-center**: Tabel auto-center pada kolom penting di mobile
 
 ## 🛠️ Teknologi
 
@@ -177,6 +186,34 @@ Untuk pertanyaan atau pengembangan lebih lanjut, sistem ini dapat dengan mudah d
 - Stock movements tracking
 - Multi-location support
 
+## 📝 Changelog
+
+### v1.1.0 (2025-12-18) - Mobile Improvements
+**Fixed Issues:**
+- ✅ **Horizontal Scroll**: Fixed table horizontal scrolling on mobile browsers
+- ✅ **Button Size**: Reduced export/delete button sizes on mobile to avoid obstruction
+- ✅ **Touch UX**: Improved touch targets and gestures for mobile devices
+
+**New Features:**
+- 🆕 **Floating Action Buttons**: Added mobile-friendly FAB for export and delete actions
+- 🆕 **Touch Swipe Gestures**: Support left/right swipe to navigate table columns
+- 🆕 **Scroll Indicators**: Visual indicators showing scrollable content
+- 🆕 **Sticky Headers**: Table headers remain visible during horizontal scroll
+- 🆕 **Auto-center**: Table automatically centers on important columns on mobile
+
+**Improvements:**
+- 📱 Enhanced mobile responsive design with better column prioritization
+- 🎯 Larger, touch-friendly checkboxes for better mobile interaction
+- ⚡ Smooth scrolling behavior with momentum on touch devices
+- 🎨 Better visual hierarchy and spacing on small screens
+
+### v1.0.0 (2025-12-18) - Initial Release
+- 🎉 Complete inventory management system
+- 📝 Full CRUD operations for items
+- 🔍 Advanced search and filtering
+- 📊 Export functionality (CSV, JSON, Print)
+- 📱 Responsive design foundation
+
 ---
 
-**Dibuat dengan ❤️ menggunakan Vanilla JavaScript ES6+**
+**Dibuat dengan ❤️ menggunakan Vanilla JavaScript ES6+ | Last Updated: 2025-12-18**

@@ -45,7 +45,7 @@ export class TableRenderer {
     createItemRow(item, selectedItems, onAction, onSelectionChange) {
         const row = document.createElement('tr');
         row.className = 'fade-in';
-        
+
         // Checkbox column
         const checkboxCell = document.createElement('td');
         const checkbox = document.createElement('input');
@@ -319,14 +319,103 @@ export class TableRenderer {
     }
 
     /**
+     * Add scroll hint for mobile users
+     */
+    addScrollHint() {
+        const tableContainer = document.querySelector('.table-container');
+        if (!tableContainer) return;
+
+        // Add touch swipe hint
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        tableContainer.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        tableContainer.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            this.handleSwipeGesture(touchStartX, touchEndX, tableContainer);
+        });
+
+        // Add scroll position indicator
+        this.addScrollIndicator(tableContainer);
+    }
+
+    /**
+     * Handle swipe gesture for mobile
+     * @param {number} startX - Touch start X position
+     * @param {number} endX - Touch end X position
+     * @param {HTMLElement} container - Table container
+     */
+    handleSwipeGesture(startX, endX, container) {
+        const swipeThreshold = 50;
+        const diff = startX - endX;
+
+        if (Math.abs(diff) > swipeThreshold) {
+            if (diff > 0) {
+                // Swipe left - scroll right
+                container.scrollBy({ left: 200, behavior: 'smooth' });
+            } else {
+                // Swipe right - scroll left
+                container.scrollBy({ left: -200, behavior: 'smooth' });
+            }
+        }
+    }
+
+    /**
+     * Add scroll position indicator
+     * @param {HTMLElement} container - Table container
+     */
+    addScrollIndicator(container) {
+        // Add scroll progress indicator
+        const indicator = document.createElement('div');
+        indicator.className = 'scroll-indicator';
+        indicator.style.cssText = `
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            width: 0%;
+            transition: width 0.3s ease;
+            z-index: 10;
+        `;
+
+        container.style.position = 'relative';
+        container.appendChild(indicator);
+
+        // Update indicator on scroll
+        container.addEventListener('scroll', () => {
+            const scrollWidth = container.scrollWidth - container.clientWidth;
+            const scrollLeft = container.scrollLeft;
+            const progress = scrollWidth > 0 ? (scrollLeft / scrollWidth) * 100 : 0;
+            indicator.style.width = `${progress}%`;
+        });
+    }
+
+    /**
+     * Center table on mobile for better viewing
+     */
+    centerTableOnMobile() {
+        if (window.innerWidth <= 768) {
+            const tableContainer = document.querySelector('.table-container');
+            if (tableContainer) {
+                // Scroll to show the middle columns (Name, Stock, Price) by default
+                tableContainer.scrollLeft = 200;
+            }
+        }
+    }
+
+    /**
      * Export table to CSV format
      * @param {Array} items - Array of items to export
      * @returns {string} - CSV content
      */
     exportToCSV(items) {
         const headers = [
-            'Kode Item', 'Barcode', 'Nama Item', 'Stok', 'Satuan', 'Rak', 
-            'Jenis', 'Merek', 'Harga Pokok', 'Harga Jual', 'Tipe', 
+            'Kode Item', 'Barcode', 'Nama Item', 'Stok', 'Satuan', 'Rak',
+            'Jenis', 'Merek', 'Harga Pokok', 'Harga Jual', 'Tipe',
             'System HPP', 'Stok Min', 'Status Jual', 'Keterangan', 'Supplier'
         ];
 
@@ -366,7 +455,7 @@ export class TableRenderer {
         if (value === null || value === undefined) {
             return '';
         }
-        
+
         const stringValue = value.toString();
         if (stringValue.includes(',') || stringValue.includes('"') || stringValue.includes('\n')) {
             return `"${stringValue.replace(/"/g, '""')}"`;
@@ -381,7 +470,7 @@ export class TableRenderer {
     printTable(items) {
         const printWindow = window.open('', '_blank');
         const tableHTML = this.generatePrintHTML(items);
-        
+
         printWindow.document.write(tableHTML);
         printWindow.document.close();
         printWindow.print();
@@ -394,7 +483,7 @@ export class TableRenderer {
      */
     generatePrintHTML(items) {
         const currentDate = new Date().toLocaleDateString('id-ID');
-        
+
         return `
             <!DOCTYPE html>
             <html>
