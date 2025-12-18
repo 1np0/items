@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Data Items - Inventory Management</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/responsive.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Sistem Data Items</h1>
+            <p>Inventory Management System</p>
+        </header>
+
+        <div class="main-content">
+            <!-- Form Input Section -->
+            <section class="input-section">
+                <div class="form-header">
+                    <h2>Input Data Item</h2>
+                    <button type="button" id="toggleForm" class="btn btn-secondary">
+                        <span class="icon">📝</span> Tambah Item Baru
+                    </button>
+                </div>
+
+                <form id="itemForm" class="item-form hidden">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="kodeItem">Kode Item *</label>
+                            <input type="text" id="kodeItem" name="kodeItem" required 
+                                   placeholder="Contoh: AS01, ITM001" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="barcode">Barcode</label>
+                            <input type="text" id="barcode" name="barcode" 
+                                   placeholder="Kode barcode produk" class="form-control">
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="namaItem">Nama Item *</label>
+                            <input type="text" id="namaItem" name="namaItem" required 
+                                   placeholder="Nama lengkap produk" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="stok">Stok</label>
+                            <input type="number" id="stok" name="stok" step="0.01" 
+                                   placeholder="0,00" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="satuan">Satuan</label>
+                            <select id="satuan" name="satuan" class="form-control">
+                                <option value="">Pilih Satuan</option>
+                                <option value="PCS">PCS (Pieces)</option>
+                                <option value="KG">KG (Kilogram)</option>
+                                <option value="LTR">LTR (Liter)</option>
+                                <option value="BOX">BOX (Kotak)</option>
+                                <option value="BKS">BKS (Bungkus)</option>
+                                <option value="BTL">BTL (Botol)</option>
+                                <option value="MTR">MTR (Meter)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="rak">Rak</label>
+                            <input type="text" id="rak" name="rak" 
+                                   placeholder="Lokasi rak" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="jenis">Jenis</label>
+                            <input type="text" id="jenis" name="jenis" 
+                                   placeholder="Kategori produk" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="merek">Merek</label>
+                            <input type="text" id="merek" name="merek" 
+                                   placeholder="Nama merek" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="hargaPokok">Harga Pokok</label>
+                            <input type="number" id="hargaPokok" name="hargaPokok" step="0.01" 
+                                   placeholder="0,00" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="hargaJual">Harga Jual</label>
+                            <input type="number" id="hargaJual" name="hargaJual" step="0.01" 
+                                   placeholder="0,00" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="tipe">Tipe</label>
+                            <select id="tipe" name="tipe" class="form-control">
+                                <option value="INV">INV (Inventory)</option>
+                                <option value="NON-INV">NON-INV (Non-Inventory)</option>
+                                <option value="SERVICE">SERVICE (Jasa)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="systemHpp">System HPP</label>
+                            <select id="systemHpp" name="systemHpp" class="form-control">
+                                <option value="FIFO">FIFO (First In First Out)</option>
+                                <option value="LIFO">LIFO (Last In First Out)</option>
+                                <option value="AVG">AVG (Average)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="stokMin">Stok Min</label>
+                            <input type="number" id="stokMin" name="stokMin" step="0.01" 
+                                   placeholder="0,00" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="statusJual">Status Jual</label>
+                            <select id="statusJual" name="statusJual" class="form-control">
+                                <option value="Masih Dijual">Masih Dijual</option>
+                                <option value="Tidak Dijual">Tidak Dijual</option>
+                                <option value="Discontinue">Discontinue</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="supplier">Supplier</label>
+                            <input type="text" id="supplier" name="supplier" 
+                                   placeholder="Kode supplier" class="form-control">
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="keterangan">Keterangan</label>
+                            <textarea id="keterangan" name="keterangan" 
+                                      placeholder="Catatan tambahan" class="form-control"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">
+                            <span class="icon">💾</span> Simpan Data
+                        </button>
+                        <button type="reset" class="btn btn-secondary">
+                            <span class="icon">🔄</span> Reset Form
+                        </button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Filter Section -->
+            <section class="filter-section">
+                <div class="filter-header">
+                    <h3>Filter & Pencarian</h3>
+                </div>
+                <div class="filter-controls">
+                    <div class="filter-group">
+                        <label for="filterJenis">Filter Jenis:</label>
+                        <select id="filterJenis" class="form-control">
+                            <option value="">Semua Jenis</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="filterSatuan">Filter Satuan:</label>
+                        <select id="filterSatuan" class="form-control">
+                            <option value="">Semua Satuan</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="searchKeyword">Cari:</label>
+                        <input type="text" id="searchKeyword" class="form-control" 
+                               placeholder="Cari berdasarkan nama, kode, atau merek">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Table Section -->
+            <section class="table-section">
+                <div class="table-header">
+                    <h3>Daftar Items</h3>
+                    <div class="table-actions">
+                        <button type="button" id="exportData" class="btn btn-success">
+                            <span class="icon">📊</span> Export Excel
+                        </button>
+                        <button type="button" id="deleteSelected" class="btn btn-danger">
+                            <span class="icon">🗑️</span> Hapus Terpilih
+                        </button>
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <div class="table-wrapper">
+                        <table id="itemsTable" class="items-table">
+                            <thead>
+                                <tr>
+                                    <th><input type="checkbox" id="selectAll"></th>
+                                    <th>Kode Item</th>
+                                    <th>Barcode</th>
+                                    <th>Nama Item</th>
+                                    <th>Stok</th>
+                                    <th>Satuan</th>
+                                    <th>Rak</th>
+                                    <th>Jenis</th>
+                                    <th>Merek</th>
+                                    <th>Harga Pokok</th>
+                                    <th>Harga Jual</th>
+                                    <th>Tipe</th>
+                                    <th>System HPP</th>
+                                    <th>Stok Min</th>
+                                    <th>Status Jual</th>
+                                    <th>Keterangan</th>
+                                    <th>Supplier</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tableBody">
+                                <!-- Data akan dimuat di sini -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="pagination-info">
+                    <div class="info-text">
+                        Menampilkan <span id="currentPage">1</span> dari <span id="totalPages">1</span> 
+                        halaman (<span id="totalItems">0</span> item)
+                    </div>
+                    <div class="pagination-controls">
+                        <button type="button" id="prevPage" class="btn btn-sm btn-secondary">‹ Prev</button>
+                        <button type="button" id="nextPage" class="btn btn-sm btn-secondary">Next ›</button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Modal untuk Edit -->
+    <div id="editModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Edit Item</h3>
+                <button type="button" class="modal-close" id="closeModal">×</button>
+            </div>
+            <div class="modal-body">
+                <form id="editForm" class="item-form">
+                    <!-- Form fields akan di-generate dengan JavaScript -->
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="js/app.js"></script>
+</body>
+</html>

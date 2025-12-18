@@ -1,0 +1,445 @@
+/* Responsive Design - Mobile First Approach */
+
+/* Mobile Devices (320px - 768px) */
+@media screen and (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    .header {
+        padding: 15px 0;
+        margin-bottom: 20px;
+    }
+
+    .header h1 {
+        font-size: 1.8rem;
+    }
+
+    .header p {
+        font-size: 1rem;
+    }
+
+    /* Form Grid - Stack on mobile */
+    .form-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .form-group.full-width {
+        grid-column: 1;
+    }
+
+    /* Form controls */
+    .form-control {
+        padding: 10px;
+        font-size: 16px; /* Prevent zoom on iOS */
+    }
+
+    .item-form {
+        padding: 20px 15px;
+    }
+
+    /* Filter controls */
+    .filter-controls {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        padding: 15px;
+    }
+
+    /* Table responsive wrapper */
+    .table-container {
+        border-radius: 0;
+        border-left: 0;
+        border-right: 0;
+    }
+
+    .table-wrapper {
+        border-radius: 0;
+        border-left: 0;
+        border-right: 0;
+    }
+
+    /* Table headers and cells */
+    .items-table th,
+    .items-table td {
+        padding: 8px 6px;
+        font-size: 0.8rem;
+    }
+
+    /* Hide less important columns on mobile */
+    .items-table th:nth-child(3), /* Barcode */
+    .items-table td:nth-child(3) {
+        display: none;
+    }
+
+    .items-table th:nth-child(7), /* Rak */
+    .items-table td:nth-child(7) {
+        display: none;
+    }
+
+    .items-table th:nth-child(10), /* Harga Pokok */
+    .items-table td:nth-child(10) {
+        display: none;
+    }
+
+    .items-table th:nth-child(12), /* Tipe */
+    .items-table td:nth-child(12) {
+        display: none;
+    }
+
+    .items-table th:nth-child(13), /* System HPP */
+    .items-table td:nth-child(13) {
+        display: none;
+    }
+
+    .items-table th:nth-child(16), /* Keterangan */
+    .items-table td:nth-child(16) {
+        display: none;
+    }
+
+    .items-table th:nth-child(17), /* Supplier */
+    .items-table td:nth-child(17) {
+        display: none;
+    }
+
+    /* Action buttons in table */
+    .action-buttons {
+        flex-direction: column;
+        gap: 2px;
+    }
+
+    .action-btn {
+        padding: 4px 6px;
+        font-size: 11px;
+        width: 100%;
+        text-align: center;
+    }
+
+    /* Form header and actions */
+    .form-header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+
+    .table-header {
+        flex-direction: column;
+        gap: 15px;
+        align-items: stretch;
+    }
+
+    .table-actions {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .form-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .form-actions .btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    /* Pagination */
+    .pagination-info {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+
+    /* Modal adjustments */
+    .modal-content {
+        width: 95%;
+        margin: 10px;
+        max-height: 95vh;
+    }
+
+    .modal-header {
+        padding: 15px;
+    }
+
+    .modal-body {
+        padding: 20px 15px;
+    }
+
+    /* Toggle form button */
+    #toggleForm {
+        width: 100%;
+        justify-content: center;
+    }
+
+    /* Price and stock text */
+    .items-table .harga,
+    .items-table .stok {
+        font-size: 0.8rem;
+    }
+}
+
+/* Tablet Devices (769px - 1024px) */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+    .container {
+        padding: 15px;
+    }
+
+    .form-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 18px;
+    }
+
+    /* Filter controls */
+    .filter-controls {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Table adjustments */
+    .items-table th,
+    .items-table td {
+        padding: 10px 8px;
+        font-size: 0.85rem;
+    }
+
+    /* Hide some columns on tablet */
+    .items-table th:nth-child(3), /* Barcode */
+    .items-table td:nth-child(3) {
+        display: none;
+    }
+
+    .items-table th:nth-child(7), /* Rak */
+    .items-table td:nth-child(7) {
+        display: none;
+    }
+
+    .items-table th:nth-child(16), /* Keterangan */
+    .items-table td:nth-child(16) {
+        display: none;
+    }
+
+    .items-table th:nth-child(17), /* Supplier */
+    .items-table td:nth-child(17) {
+        display: none;
+    }
+
+    /* Modal adjustments */
+    .modal-content {
+        width: 85%;
+    }
+}
+
+/* Small Mobile Devices (320px - 480px) */
+@media screen and (max-width: 480px) {
+    .header h1 {
+        font-size: 1.5rem;
+    }
+
+    .header p {
+        font-size: 0.9rem;
+    }
+
+    .form-header h2,
+    .filter-header h3,
+    .table-header h3 {
+        font-size: 1.1rem;
+    }
+
+    /* More aggressive column hiding */
+    .items-table th:nth-child(6), /* Rak */
+    .items-table td:nth-child(6) {
+        display: none;
+    }
+
+    .items-table th:nth-child(9), /* Merek */
+    .items-table td:nth-child(9) {
+        display: none;
+    }
+
+    .items-table th:nth-child(11), /* Harga Jual */
+    .items-table td:nth-child(11) {
+        display: none;
+    }
+
+    .items-table th:nth-child(14), /* Status Jual */
+    .items-table td:nth-child(14) {
+        display: none;
+    }
+
+    /* Keep only essential columns: Code, Name, Stock, Unit, Price, Actions */
+    .items-table th:nth-child(1), /* Checkbox */
+    .items-table th:nth-child(2), /* Code */
+    .items-table th:nth-child(4), /* Name */
+    .items-table th:nth-child(5), /* Stock */
+    .items-table th:nth-child(8), /* Type */
+    .items-table th:nth-child(18) { /* Actions */
+        display: table-cell;
+    }
+
+    .items-table td:nth-child(1), /* Checkbox */
+    .items-table td:nth-child(2), /* Code */
+    .items-table td:nth-child(4), /* Name */
+    .items-table td:nth-child(5), /* Stock */
+    .items-table td:nth-child(8), /* Type */
+    .items-table td:nth-child(18) { /* Actions */
+        display: table-cell;
+    }
+
+    /* Hide all other columns */
+    .items-table th:not(:nth-child(1)):not(:nth-child(2)):not(:nth-child(4)):not(:nth-child(5)):not(:nth-child(8)):not(:nth-child(18)),
+    .items-table td:not(:nth-child(1)):not(:nth-child(2)):not(:nth-child(4)):not(:nth-child(5)):not(:nth-child(8)):not(:nth-child(18)) {
+        display: none;
+    }
+
+    /* Adjust table for small screens */
+    .items-table th:nth-child(2),
+    .items-table td:nth-child(2) {
+        min-width: 80px;
+        font-weight: bold;
+    }
+
+    .items-table th:nth-child(4),
+    .items-table td:nth-child(4) {
+        min-width: 120px;
+    }
+
+    .items-table th:nth-child(5),
+    .items-table td:nth-child(5) {
+        min-width: 60px;
+        text-align: right;
+    }
+
+    .items-table th:nth-child(8),
+    .items-table td:nth-child(8) {
+        min-width: 50px;
+        text-align: center;
+    }
+}
+
+/* Landscape orientation on mobile */
+@media screen and (max-width: 768px) and (orientation: landscape) {
+    .form-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+    }
+
+    .filter-controls {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    /* Show more columns in landscape */
+    .items-table th:nth-child(3), /* Barcode */
+    .items-table td:nth-child(3) {
+        display: table-cell;
+    }
+
+    .items-table th:nth-child(6), /* Rak */
+    .items-table td:nth-child(6) {
+        display: table-cell;
+    }
+
+    .items-table th:nth-child(9), /* Merek */
+    .items-table td:nth-child(9) {
+        display: table-cell;
+    }
+}
+
+/* Large Desktop (1200px+) */
+@media screen and (min-width: 1200px) {
+    .container {
+        max-width: 1600px;
+        padding: 25px;
+    }
+
+    .form-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 25px;
+    }
+
+    .filter-controls {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    /* Show all columns on large screens */
+    .items-table th,
+    .items-table td {
+        padding: 15px 12px;
+        font-size: 0.9rem;
+    }
+
+    .items-table th:nth-child(2),
+    .items-table td:nth-child(2) {
+        min-width: 120px;
+    }
+
+    .items-table th:nth-child(4),
+    .items-table td:nth-child(4) {
+        min-width: 200px;
+    }
+
+    .items-table th:nth-child(10),
+    .items-table td:nth-child(10),
+    .items-table th:nth-child(11),
+    .items-table td:nth-child(11) {
+        min-width: 100px;
+    }
+}
+
+/* High DPI / Retina displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .form-control,
+    .btn {
+        border-width: 1px;
+    }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+    .btn,
+    .form-control,
+    .action-btn {
+        min-height: 44px; /* Apple's recommended touch target */
+    }
+
+    .action-btn {
+        min-height: 32px;
+    }
+
+    /* Larger touch targets */
+    .items-table th,
+    .items-table td {
+        padding: 12px 10px;
+    }
+}
+
+/* Print styles */
+@media print {
+    .input-section,
+    .filter-section,
+    .form-actions,
+    .table-actions,
+    .pagination-controls,
+    .modal {
+        display: none !important;
+    }
+
+    .container {
+        max-width: none;
+        padding: 0;
+    }
+
+    .items-table {
+        border-collapse: collapse;
+    }
+
+    .items-table th,
+    .items-table td {
+        border: 1px solid #000;
+        padding: 8px;
+        font-size: 12px;
+    }
+
+    .items-table th {
+        background: #f0f0f0 !important;
+        -webkit-print-color-adjust: exact;
+    }
+}
